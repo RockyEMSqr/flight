@@ -137,7 +137,7 @@ class Request {
                 'ajax' => self::getVar('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest',
                 'scheme' => self::getVar('SERVER_PROTOCOL', 'HTTP/1.1'),
                 'user_agent' => self::getVar('HTTP_USER_AGENT'),
-                'type' => self::getVar('CONTENT_TYPE'),
+                'type' => self::getVar(php_sapi_name() == 'cli-server' ? 'HTTP_CONTENT_TYPE' : 'CONTENT_TYPE'),
                 'length' => self::getVar('CONTENT_LENGTH', 0),
                 'query' => new Collection($_GET),
                 'data' => new Collection($_POST),
